@@ -41,6 +41,7 @@
             this.ClearWordsButton = new System.Windows.Forms.Button();
             this.ClearPagesButton = new System.Windows.Forms.Button();
             this.ClearResultButton = new System.Windows.Forms.Button();
+            this.SearchButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -166,18 +167,31 @@
             // ClearResultButton
             // 
             this.ClearResultButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.ClearResultButton.Location = new System.Drawing.Point(444, 448);
+            this.ClearResultButton.Location = new System.Drawing.Point(654, 448);
             this.ClearResultButton.Name = "ClearResultButton";
-            this.ClearResultButton.Size = new System.Drawing.Size(403, 34);
+            this.ClearResultButton.Size = new System.Drawing.Size(193, 34);
             this.ClearResultButton.TabIndex = 12;
             this.ClearResultButton.Text = "Wyczyść wyniki";
             this.ClearResultButton.UseVisualStyleBackColor = true;
+            this.ClearResultButton.Click += new System.EventHandler(this.ClearResultButton_Click);
+            // 
+            // SearchButton
+            // 
+            this.SearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.SearchButton.Location = new System.Drawing.Point(445, 448);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(193, 34);
+            this.SearchButton.TabIndex = 13;
+            this.SearchButton.Text = "Szukaj";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 510);
+            this.ClientSize = new System.Drawing.Size(877, 510);
+            this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.ClearResultButton);
             this.Controls.Add(this.ClearPagesButton);
             this.Controls.Add(this.ClearWordsButton);
@@ -214,6 +228,7 @@
         private System.Windows.Forms.Button ClearWordsButton;
         private System.Windows.Forms.Button ClearPagesButton;
         private System.Windows.Forms.Button ClearResultButton;
+        private System.Windows.Forms.Button SearchButton;
     }
 }
 

@@ -1,1 +1,9 @@
 D:\Programowanie\VisualProjects\Wyszukiwarka Słów\Wyszukiwarka Słów\bin\Debug\Wyszukiwarka Słów.exe.config
+D:\Programowanie\VisualProjects\Wyszukiwarka Słów\Wyszukiwarka Słów\bin\Debug\Wyszukiwarka Słów.exe
+D:\Programowanie\VisualProjects\Wyszukiwarka Słów\Wyszukiwarka Słów\bin\Debug\Wyszukiwarka Słów.pdb
+D:\Programowanie\VisualProjects\Wyszukiwarka Słów\Wyszukiwarka Słów\obj\Debug\Wyszukiwarka Słów.csprojResolveAssemblyReference.cache
+D:\Programowanie\VisualProjects\Wyszukiwarka Słów\Wyszukiwarka Słów\obj\Debug\Wyszukiwarka_Słów.Form1.resources
+D:\Programowanie\VisualProjects\Wyszukiwarka Słów\Wyszukiwarka Słów\obj\Debug\Wyszukiwarka_Słów.Properties.Resources.resources
+D:\Programowanie\VisualProjects\Wyszukiwarka Słów\Wyszukiwarka Słów\obj\Debug\Wyszukiwarka Słów.csproj.GenerateResource.Cache
+D:\Programowanie\VisualProjects\Wyszukiwarka Słów\Wyszukiwarka Słów\obj\Debug\Wyszukiwarka Słów.exe
+D:\Programowanie\VisualProjects\Wyszukiwarka Słów\Wyszukiwarka Słów\obj\Debug\Wyszukiwarka Słów.pdb

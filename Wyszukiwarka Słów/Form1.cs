@@ -20,6 +20,8 @@ namespace Wyszukiwarka_Słów
         public Form1()
         {
             InitializeComponent();
+
+            initCollections();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -75,6 +77,37 @@ namespace Wyszukiwarka_Słów
         private void SearchButton_Click(object sender, EventArgs e)
         {
             wordSearcher.FindWordsForPages(wordColl, pageColl, ResultCollectionView);
+        }
+
+        private void initCollections()
+        {
+            initWordCollection();  
+            initPageCollection();
+        }
+
+        private void initWordCollection()
+        {
+            wordColl.Add("panel");
+            wordColl.Add("sieci");
+            wordColl.Add("wejbxabjsf");
+            wordColl.Add("losowa");
+
+            WordCollectionView.Items.Add("panel");
+            WordCollectionView.Items.Add("sieci");
+            WordCollectionView.Items.Add("wejbxabjsf");
+            WordCollectionView.Items.Add("losowa");
+
+        }
+
+        private void initPageCollection()
+        {
+            pageColl.Add("http://eduinf.waw.pl/inf/utils/010_2010/0213.php");
+            pageColl.Add("https://sekurak.pl/");
+            
+
+            PageCollectionView.Items.Add("http://eduinf.waw.pl/inf/utils/010_2010/0213.php");
+            PageCollectionView.Items.Add("https://sekurak.pl/");
+            
         }
     }
 }

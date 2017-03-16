@@ -20,16 +20,26 @@ namespace Wyszukiwarka_Słów
 
                 resultView.Items.Add(pageUrl);
 
-                string pageContent = await getStringTask;
+                try
+                {
+                    string pageContent = await getStringTask;
 
-                List<string> resultsForPage =  FindWordsInPage(words, pageContent).Result;
+                    List<string> resultsForPage = FindWordsInPage(words, pageContent);
 
-                AddResultToCollection(resultsForPage, resultView);
+                    AddResultToCollection(resultsForPage, resultView);
+                }
+
+                catch (Exception e)
+                {
+                    resultView.Items.Add("Problem z połączeniem");
+                }
+
+                
 
             }
         }
 
-        public async Task<List<String>>  FindWordsInPage(List<string> words, String pageContent)
+        public List<String> FindWordsInPage(List<string> words, String pageContent)
         {
             List<string> results = new List<string>(); 
             foreach (string word in words)

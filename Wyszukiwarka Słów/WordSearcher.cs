@@ -24,7 +24,9 @@ namespace Wyszukiwarka_Słów
                 {
                     string pageContent = await getStringTask;
 
-                    List<string> resultsForPage = FindWordsInPage(words, pageContent);
+                    Task<List<String>> getResultLines = FindWordsInPage(words, pageContent);
+
+                    List<string> resultsForPage = await getResultLines;
 
                     AddResultToCollection(resultsForPage, resultView);
                 }
@@ -32,23 +34,29 @@ namespace Wyszukiwarka_Słów
                 catch (Exception e)
                 {
                     resultView.Items.Add("Problem z połączeniem");
+                    break;
                 }
-
-                
-
             }
         }
 
-        public List<String> FindWordsInPage(List<string> words, String pageContent)
+        public async Task<List<String>> FindWordsInPage(List<string> words, String pageContent)
         {
             List<string> results = new List<string>(); 
+
             foreach (string word in words)
             {
-                int count = Regex.Matches(pageContent, word).Count;
+                int count = await CountWordForPage(word, pageContent);
                 results.Add(word + ": " + count);
             }
 
             return results;
+        }
+
+        
+        private async Task<int> CountWordForPage(String word, String page)
+        {
+            int count = Regex.Matches(page, word).Count;
+            return count;
         }
 
         private void AddResultToCollection(List<string> results, ListBox resultView)

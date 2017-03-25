@@ -20,24 +20,40 @@ namespace Wyszukiwarka_Słów
 
         public async Task FindWordsForPages(List<string> words, List<string> pageUrls)
         {
+            List<Task> tasks = new List<Task>();
+
             foreach (string pageUrl in pageUrls)
             {
-                await Task.Run(() => LoadContentPageAndFindWordsForPage(words, pageUrl));   
+                Task findWords = LoadContentPageAndFindWordsForPage(words, pageUrl);
+                tasks.Add(findWords);  
             }
+
+            foreach (Task task in tasks)
+            {
+                doTask(task);
+            }
+
+        }
+
+        public async Task doTask(Task task)
+        {
+            await task;
         }
 
         public async Task LoadContentPageAndFindWordsForPage(List<string> words, string pageUrl)
         {
+            Console.WriteLine("Jestem w LoadContentPageAndFindWordsForPage");
             HttpClient httpClient = new HttpClient();
             Task<string> getStringTask = httpClient.GetStringAsync(pageUrl);
+            Console.WriteLine("Załadowano stronę");
 
-            resultView.Items.Add(pageUrl);
+            Console.WriteLine("Dodano stronę do widoku");
 
             try
             {
                 string pageContent = await getStringTask;
 
-                Task<List<String>> getResultLines = FindWordsInPage(words, pageContent);
+                Task<List<String>> getResultLines = FindWordsInPage(words, pageContent, pageUrl);
 
                 List<string> resultsForPage = await getResultLines;
 
@@ -50,9 +66,12 @@ namespace Wyszukiwarka_Słów
             }
         }
 
-        public async Task<List<String>> FindWordsInPage(List<string> words, String pageContent)
+        public async Task<List<String>> FindWordsInPage(List<string> words, String pageContent, string pageUrl)
         {
-            List<string> results = new List<string>(); 
+            Console.WriteLine("Jestem w FindWordsInPage");
+            List<string> results = new List<string>();
+
+            results.Add(pageUrl);
 
             foreach (string word in words)
             {
@@ -65,6 +84,7 @@ namespace Wyszukiwarka_Słów
 
         private void AddResultToCollection(List<string> results)
         {
+            Console.WriteLine("AddResultToCollection");
             foreach (string result in results)
             {
                 resultView.Items.Add(result);

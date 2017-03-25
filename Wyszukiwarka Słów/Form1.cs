@@ -46,7 +46,7 @@ namespace Wyszukiwarka_Słów
 
         private void AddPageButton_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(NewWordValue.Text))
+            if (!String.IsNullOrEmpty(NewPageValue.Text))
             {
                 pageColl.Add(NewPageValue.Text);
                 PageCollectionView.Items.Add(NewPageValue.Text);
@@ -78,7 +78,7 @@ namespace Wyszukiwarka_Słów
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-             Task.Run(() => wordSearcher.FindWordsForPages(wordColl, pageColl));
+            wordSearcher.FindWordsForPages(wordColl, pageColl);
         }
 
         private void initCollections()
@@ -105,11 +105,13 @@ namespace Wyszukiwarka_Słów
         {
             pageColl.Add("http://eduinf.waw.pl/inf/utils/010_2010/0213.php");
             pageColl.Add("https://sekurak.pl/");
-            
+            pageColl.Add("https://sekurak.pl/");
+
 
             PageCollectionView.Items.Add("http://eduinf.waw.pl/inf/utils/010_2010/0213.php");
             PageCollectionView.Items.Add("https://sekurak.pl/");
-            
+            PageCollectionView.Items.Add("https://sekurak.pl/");
+
         }
     }
 }

@@ -11,31 +11,42 @@ namespace Wyszukiwarka_Słów
 {
     class WordSearcher
     {
-        public async void FindWordsForPages(List<string> words, List<string> pageUrls, ListBox resultView)
+        ListBox resultView;
+
+        public WordSearcher(ListBox resultView)
+        {
+            this.resultView = resultView;
+        }
+
+        public async Task FindWordsForPages(List<string> words, List<string> pageUrls)
         {
             foreach (string pageUrl in pageUrls)
             {
-                HttpClient httpClient = new HttpClient();
-                Task<string> getStringTask = httpClient.GetStringAsync(pageUrl);
+                await Task.Run(() => LoadContentPageAndFindWordsForPage(words, pageUrl));   
+            }
+        }
 
-                resultView.Items.Add(pageUrl);
+        public async Task LoadContentPageAndFindWordsForPage(List<string> words, string pageUrl)
+        {
+            HttpClient httpClient = new HttpClient();
+            Task<string> getStringTask = httpClient.GetStringAsync(pageUrl);
 
-                try
-                {
-                    string pageContent = await getStringTask;
+            resultView.Items.Add(pageUrl);
 
-                    Task<List<String>> getResultLines = FindWordsInPage(words, pageContent);
+            try
+            {
+                string pageContent = await getStringTask;
 
-                    List<string> resultsForPage = await getResultLines;
+                Task<List<String>> getResultLines = FindWordsInPage(words, pageContent);
 
-                    AddResultToCollection(resultsForPage, resultView);
-                }
+                List<string> resultsForPage = await getResultLines;
 
-                catch (Exception e)
-                {
-                    resultView.Items.Add("Problem z połączeniem");
-                    break;
-                }
+                AddResultToCollection(resultsForPage);
+            }
+
+            catch (Exception e)
+            {
+                resultView.Items.Add("Problem z połączeniem");
             }
         }
 
@@ -45,21 +56,14 @@ namespace Wyszukiwarka_Słów
 
             foreach (string word in words)
             {
-                int count = await CountWordForPage(word, pageContent);
+                int count = Regex.Matches(pageContent, word).Count;
                 results.Add(word + ": " + count);
             }
 
             return results;
         }
 
-        
-        private async Task<int> CountWordForPage(String word, String page)
-        {
-            int count = Regex.Matches(page, word).Count;
-            return count;
-        }
-
-        private void AddResultToCollection(List<string> results, ListBox resultView)
+        private void AddResultToCollection(List<string> results)
         {
             foreach (string result in results)
             {

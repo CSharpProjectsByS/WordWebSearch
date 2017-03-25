@@ -15,13 +15,15 @@ namespace Wyszukiwarka_Słów
 
         private List<string> pageColl = new List<string>();
         private List<string> wordColl = new List<string>();
-        private WordSearcher wordSearcher = new WordSearcher();
+        private WordSearcher wordSearcher;
 
         public Form1()
         {
             InitializeComponent();
 
             initCollections();
+
+            wordSearcher = new WordSearcher(ResultCollectionView);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -76,7 +78,7 @@ namespace Wyszukiwarka_Słów
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            wordSearcher.FindWordsForPages(wordColl, pageColl, ResultCollectionView);
+             Task.Run(() => wordSearcher.FindWordsForPages(wordColl, pageColl));
         }
 
         private void initCollections()

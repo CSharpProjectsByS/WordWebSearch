@@ -76,9 +76,9 @@ namespace Wyszukiwarka_Słów
             ResultCollectionView.Items.Clear();
         }
 
-        private void SearchButton_Click(object sender, EventArgs e)
+        private async void SearchButton_Click(object sender, EventArgs e)
         {
-            wordSearcher.FindWordsForPages(wordColl, pageColl);
+            await wordSearcher.FindWordsForPages(wordColl, pageColl);
         }
 
         private void initCollections()

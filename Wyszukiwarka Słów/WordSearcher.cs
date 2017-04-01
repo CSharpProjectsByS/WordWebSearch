@@ -30,7 +30,7 @@ namespace Wyszukiwarka_Słów
 
             foreach (Task task in tasks)
             {
-                doTask(task);
+                await task;
             }
 
         }
@@ -66,20 +66,25 @@ namespace Wyszukiwarka_Słów
             }
         }
 
-        public async Task<List<String>> FindWordsInPage(List<string> words, String pageContent, string pageUrl)
+        public Task<List<String>> FindWordsInPage(List<string> words, String pageContent, string pageUrl)
         {
             Console.WriteLine("Jestem w FindWordsInPage");
-            List<string> results = new List<string>();
 
-            results.Add(pageUrl);
-
-            foreach (string word in words)
+            return  Task.Run<List<String>>(() =>
             {
-                int count = Regex.Matches(pageContent, word).Count;
-                results.Add(word + ": " + count);
-            }
+                List<string> results = new List<string>();
 
-            return results;
+                results.Add(pageUrl);
+
+                foreach (string word in words)
+                {
+                    int count = Regex.Matches(pageContent, word).Count;
+                    results.Add(word + ": " + count);
+                }
+
+                return results;
+            });
+            
         }
 
         private void AddResultToCollection(List<string> results)
